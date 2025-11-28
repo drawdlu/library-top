@@ -35,6 +35,7 @@ function appendBook (element) {
     appendBookDetail(card, 'pages', element.pages)
     appendBookDetail(card, 'read', element.read)
     const button = createDeleteButton(element)
+    addDeleteListener(button)
     card.appendChild(button)
 
     books.appendChild(card)
@@ -103,11 +104,9 @@ function removeFromLibrary(bookId) {
     myLibrary.splice(index, 1)
 }
 
-const deleteButtons = document.querySelectorAll("[data-id]")
-
-deleteButtons.forEach( button => {
+function addDeleteListener(button) {
     button.addEventListener('click', (e) => {
         removeFromLibrary(extractID(e))
         removeElement(e)
     })
-})
+}
