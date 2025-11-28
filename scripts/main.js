@@ -46,3 +46,24 @@ function appendBookDetail(card, name, value) {
 }
 
 displayBooks()
+
+// Create
+
+const dialog = document.querySelector("dialog")
+const showButton = document.querySelector("dialog + button")
+const bookForm = document.getElementById("book-form")
+
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+})
+
+bookForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(bookForm)
+    const book = Object.fromEntries(formData.entries())
+    addBookToLibrary(book.title, book.author, book.pages, book.read)
+    appendBook(myLibrary.at(-1))
+    dialog.close()
+    bookForm.reset()
+})
