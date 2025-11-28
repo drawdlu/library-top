@@ -1,17 +1,17 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, status) {
     this.id = crypto.randomUUID()
     this.title = title
     this.author = author
     this.pages = pages
-    this.read = read
+    this.status = status
 }
 
 // Display
 
-function addBookToLibrary(title, author, pages, read = "unread") {
-    let newBook = new Book(title, author, pages, read)
+function addBookToLibrary(title, author, pages, status = "unread") {
+    let newBook = new Book(title, author, pages, status)
     myLibrary.push(newBook)
 }
 
@@ -33,7 +33,7 @@ function appendBook (element) {
     appendBookDetail(card, 'title', element.title)
     appendBookDetail(card, 'author', element.author)
     appendBookDetail(card, 'pages', element.pages)
-    appendBookDetail(card, 'read', element.read)
+    appendBookDetail(card, 'status', element.status)
     const button = createDeleteButton(element)
     addDeleteListener(button)
     card.appendChild(button)
@@ -65,7 +65,7 @@ bookForm.addEventListener('submit', (e) => {
 
     const formData = new FormData(bookForm)
     const book = Object.fromEntries(formData.entries())
-    addBookToLibrary(book.title, book.author, book.pages, book.read)
+    addBookToLibrary(book.title, book.author, book.pages, book.status)
     appendBook(myLibrary.at(-1))
     dialog.close()
     bookForm.reset()
