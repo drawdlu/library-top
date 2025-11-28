@@ -34,6 +34,8 @@ function appendBook (element) {
     appendBookDetail(card, 'author', element.author)
     appendBookDetail(card, 'pages', element.pages)
     appendBookDetail(card, 'read', element.read)
+    const button = createDeleteButton(element)
+    card.appendChild(button)
 
     books.appendChild(card)
 }
@@ -66,4 +68,46 @@ bookForm.addEventListener('submit', (e) => {
     appendBook(myLibrary.at(-1))
     dialog.close()
     bookForm.reset()
+})
+
+// Delete
+
+function createDeleteButton(element) {
+    const button = document.createElement("button")
+    button.textContent = "Remove"
+    button.dataset.id = element.id
+
+    return button
+}
+
+function extractID(event) {
+    return event.target.dataset.id
+}
+
+function getCardElement(event) {
+    return event.target.parentElement
+}
+
+function getParentElement(event) {
+    return getCardElement(event).parentElement
+}
+
+function removeElement(event) {
+    const card = getCardElement(event)
+    const parent = getParentElement(event)
+    parent.removeChild(card)
+}
+
+function removeFromLibrary(bookId) {
+    const index = myLibrary.findIndex( book => book.id == bookId )
+    myLibrary.splice(index, 1)
+}
+
+const deleteButtons = document.querySelectorAll("[data-id]")
+
+deleteButtons.forEach( button => {
+    button.addEventListener('click', (e) => {
+        removeFromLibrary(extractID(e))
+        removeElement(e)
+    })
 })
