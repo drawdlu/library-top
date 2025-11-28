@@ -14,4 +14,45 @@
 
 * { 
     font-family: "roboto", Arial, Helvetica, sans-serif;
+    --darker-gray: #2C3639;
+    --dark-gray: #3F4E4F;
+    --brown: #A27B5C;
+    --light-brown: #b4957c;
+    --lighter-brown: #DCD7C9;
+}
+
+header {
+    background-color: var(--darker-gray);
+    height: 8rem;
+    font-size: 1.5rem;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
+
+button.create-book {
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    border: none;
+}
+
+button {
+    background-color: var(--brown);
+
+    transition: .5s;
+}
+
+button:hover {
+    background-color: var(--light-brown);
+    cursor: pointer;
 }

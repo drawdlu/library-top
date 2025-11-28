@@ -74,7 +74,7 @@ displayBooks()
 // Create
 
 const dialog = document.querySelector("dialog")
-const showButton = document.querySelector("dialog + button")
+const showButton = document.querySelector(".create-book")
 const bookForm = document.getElementById("book-form")
 
 showButton.addEventListener("click", () => {
