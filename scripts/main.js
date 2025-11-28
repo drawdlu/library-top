@@ -25,20 +25,41 @@ function displayBooks() {
     myLibrary.forEach( appendBook )
 }
 
-function appendBook (element) {
+function appendBook (book) {
     const books = document.querySelector("main .container .books")
     const card = document.createElement("div")
     card.classList.add("card")
 
-    appendBookDetail(card, 'title', element.title)
-    appendBookDetail(card, 'author', element.author)
-    appendBookDetail(card, 'pages', element.pages)
-    appendBookDetail(card, 'status', element.status)
-    const button = createDeleteButton(element)
-    addDeleteListener(button)
-    card.appendChild(button)
+    appendBookDetail(card, 'title', book.title)
+    appendBookDetail(card, 'author', book.author)
+    appendBookDetail(card, 'pages', book.pages)
+    appendBookDetail(card, 'status', book.status)
+
+    const buttonDiv = createButtonDiv()
+    card.appendChild(buttonDiv)
+    appendDeleteButton(buttonDiv, book)
+    appendToggleButton(buttonDiv, book)
 
     books.appendChild(card)
+}
+
+function createButtonDiv() {
+    const buttonDiv = document.createElement("div")
+    buttonDiv.classList.add("buttons")
+
+    return buttonDiv
+}
+
+function appendDeleteButton(buttonDiv, book) {
+    const button = createDeleteButton(book)
+    addDeleteListener(button)
+    buttonDiv.appendChild(button)
+}
+
+function appendToggleButton(buttonDiv, book) {
+    const button = createToggleButton(book)
+    addToggleListener(button)
+    buttonDiv.appendChild(button)
 }
 
 function appendBookDetail(card, name, value) {
@@ -73,20 +94,21 @@ bookForm.addEventListener('submit', (e) => {
 
 // Delete
 
-function createDeleteButton(element) {
+function createDeleteButton(book) {
     const button = document.createElement("button")
     button.textContent = "Remove"
-    button.dataset.id = element.id
+    button.classList.add("delete")
+    button.dataset.id = book.id
 
     return button
 }
 
-function extractID(event) {
+function extractId(event) {
     return event.target.dataset.id
 }
 
 function getCardElement(event) {
-    return event.target.parentElement
+    return event.target.parentElement.parentElement
 }
 
 function getParentElement(event) {
@@ -106,7 +128,51 @@ function removeFromLibrary(bookId) {
 
 function addDeleteListener(button) {
     button.addEventListener('click', (e) => {
-        removeFromLibrary(extractID(e))
+        removeFromLibrary(extractId(e))
         removeElement(e)
+    })
+}
+
+// Toggle read status
+
+Book.prototype.toggleStatus = function () {
+    switch (this.status) {
+        case "unread":
+            this.status = "reading"
+            break;
+        case "reading":
+            this.status = "read"
+            break;
+        default: 
+            this.status = "unread"
+            break;
+    }
+}
+
+function createToggleButton(book) {
+    const button = document.createElement("button")
+    button.textContent = "Toggle Status"
+    button.classList.add("toggle")
+    button.dataset.id = book.id
+
+    return button
+}
+
+function getBook(bookId) {
+    const book = myLibrary.find( book => book.id == bookId)
+    return book
+}
+
+function updatePageBookStatus(event, status) {
+    const card = getCardElement(event)
+    const statusElement = card.querySelector(".status")
+    statusElement.textContent = status
+}
+
+function addToggleListener(button) {
+    button.addEventListener('click', (e) => {
+        const book = getBook(extractId(e))
+        book.toggleStatus()
+        updatePageBookStatus(e, book.status)
     })
 }
