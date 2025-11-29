@@ -76,6 +76,7 @@ displayBooks()
 const dialog = document.querySelector("dialog")
 const showButton = document.querySelector(".create-book")
 const bookForm = document.getElementById("book-form")
+const cancelButton = document.querySelector("button.cancel")
 
 showButton.addEventListener("click", () => {
     dialog.showModal();
@@ -90,6 +91,11 @@ bookForm.addEventListener('submit', (e) => {
     appendBook(myLibrary.at(-1))
     dialog.close()
     bookForm.reset()
+})
+
+
+cancelButton.addEventListener( "click", () => {
+    dialog.close()
 })
 
 // Delete
