@@ -56,3 +56,44 @@ button:hover {
     background-color: var(--light-brown);
     cursor: pointer;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main .container .books {
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.books .card {
+    min-width: 35ch;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .25rem;
+    border: 2px solid var(--dark-gray);
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 2px 5px 10px var(--dark-gray);
+}
+
+.card .buttons {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.card .buttons button {
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
