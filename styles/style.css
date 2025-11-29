@@ -108,3 +108,27 @@ footer {
     font-weight: bold;
     color: white;
 }
+
+.container .form dialog {
+    padding: 3rem;
+    margin: 7rem auto;
+    border-radius: 10px;
+}
+
+.form dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+dialog form .field {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.form dialog form button {
+    padding: .25rem .5rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
