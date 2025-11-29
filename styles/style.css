@@ -132,3 +132,14 @@ dialog form .field {
     font-weight: bold;
     border-radius: 5px;
 }
+
+dialog .cancel-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+dialog .cancel-button button {
+    padding: .25rem .5rem;
+    border-radius: 5px;
+}
